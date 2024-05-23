@@ -1,51 +1,52 @@
 import random
 import matplotlib.pyplot as plt
 
+# Chiedi il numero di squadre
+num_squadre = int(input("Inserisci il numero di squadre: "))
 
-#chiede all'utente il numero di squadre 
-numero_di_squadre = int(input("Inserisci il numero di squadre del campionato: "))
+# Crea una lista per memorizzare i nomi delle squadre
+nomi_squadre = []
 
-#lista delle squadre
-lista_squadre = []
+# Chiedi i nomi delle squadre
+for i in range(num_squadre):
+    nome_squadra = input(f"Inserisci il nome della squadra {i+1}: ")
+    nomi_squadre.append(nome_squadra)
 
-#chiede il nome delle squadre e lo aggiunge alla lista
-for i in range (numero_di_squadre):
-    nome_squadra = input(f"Enter the name of team {i+1}: ")    
-    lista_squadre.append(nome_squadra)
+# Crea un dizionario per memorizzare i punti delle squadre
+punti_squadre = {nome: 0 for nome in nomi_squadre}
 
-#mette a schermo il nome delle squadre
-print("Le squadre sono: ")
-for squadra in lista_squadre:
-    print(squadra)
+# Simula le partite del campionato
+for i in range(len(nomi_squadre)):
+    for j in range(i + 1, len(nomi_squadre)):
+        squadra1 = nomi_squadre[i]
+        squadra2 = nomi_squadre[j]
+        
+        # Simula un risultato casuale: vittoria, pareggio o sconfitta
+        risultato = random.choice(["vittoria1", "pareggio", "vittoria2"])
+        
+        if risultato == "vittoria1":
+            punti_squadre[squadra1] += 3
+        elif risultato == "pareggio":
+            punti_squadre[squadra1] += 1
+            punti_squadre[squadra2] += 1
+        elif risultato == "vittoria2":
+            punti_squadre[squadra2] += 3
 
-#simulazione campionato
-punti = [0] * numero_di_squadre
-for i in range(numero_di_squadre - 1):
-    for j in range(i + 1, numero_di_squadre):
-        risultato = random.choice([0, 1, 2])
+# Ordina le squadre in base ai punti
+classifica_finale = sorted(punti_squadre.items(), key=lambda x: x[1], reverse=True)
 
-        if risultato == 0:
-            # Pareggio
-            punti[i] += 1
-            punti[j] += 1
+# Stampa la classifica finale
+print("\nClassifica finale:")
+for i, (squadra, punti) in enumerate(classifica_finale):
+    print(f"{i+1}. {squadra} - {punti} punti")
 
-        elif risultato == 1:
-            # Vittoria della squadra i
-            punti[i] += 3
+# Grafica della classifica finale
+squadre = [squadra for squadra, punti in classifica_finale]
+punti = [punti for squadra, punti in classifica_finale]
 
-        else:
-            # Vittoria della squadra j
-            punti[j] += 3
-#classifica finale
-classifica = sorted(zip(lista_squadre, punti), key=lambda x: x[1], reverse=True)
-
-
-plt.bar([i for i in range(numero_di_squadre)], [x[1] for x in classifica], tick_label=[x[0] for x in classifica])
-plt.title("Classifica finale")
-plt.xlabel("Squadre")
-plt.ylabel("Punti")
+plt.figure(figsize=(10, 6))
+plt.barh(squadre, punti, color='skyblue')
+plt.xlabel('Punti')
+plt.title('Classifica finale del campionato')
+plt.gca().invert_yaxis()  # Inverti l'asse y per avere il primo in alto
 plt.show()
-
-
-
-
