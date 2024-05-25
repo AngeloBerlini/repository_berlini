@@ -38,8 +38,9 @@ def simulazione_campionato() -> dict :
             print(f"{giornata}^ Giornata: {squadra_trasferta} ha vinto la partita contro {squadra_casa}")
     return punti
 
-# Funzione che visualizza l'esito finale del campionato
-def visualizzazione_dell_andamento(punti):
+# Funzione che visualizza la classifica finale 
+def visualizzazione_dell_andamento(punti) -> None:
+
     # Ordina le squadre in base ai punti
     classifica_finale = sorted(punti.items(), key=lambda x: x[1], reverse=True)
 
