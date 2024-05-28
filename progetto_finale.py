@@ -47,6 +47,8 @@ def simulazione_campionato() -> dict :
 def visualizzazione_dell_andamento(punti):
 
     # Ordina le squadre in base ai punti
+    # key=lambda x: x[1] = L'ordinamento verrà effettuato in base al secondo elemento di ogni tupla
+    # (che in questo caso corrisponde al punteggio della squadra)
     classifica_finale = sorted(punti.items(), key=lambda x: x[1], reverse=True)
 
 
@@ -58,9 +60,11 @@ def visualizzazione_dell_andamento(punti):
     plt.barh(squadre, punti, color='skyblue')
     plt.xlabel('Punti')
     plt.title('Classifica finale del campionato')
-    plt.gca().invert_yaxis()  # Inverti l'asse y per avere il primo in alto
+    plt.gca().invert_yaxis()  
     plt.show()
-
+    plot_filename = f'static'
+    plt.savefig(plot_filename)
+    
 # Utilizzo delle funzioni
 punti_stagione = simulazione_campionato()
 visualizzazione_dell_andamento(punti_stagione)
