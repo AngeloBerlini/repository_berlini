@@ -17,7 +17,7 @@ def simulazione_campionato() -> dict :
 
     for giornata in range(1, 39): # 38 giornate
         print(f"Giornata {giornata}:")
-        for giornata in range(10): # 10 partite per giornata
+        for turno in range(10): # 10 partite per giornata
             squadra_casa, squadra_trasferta = random.sample(campionato, 2)
 
             # Simula un risultato casuale: vittoria, pareggio o sconfitta
