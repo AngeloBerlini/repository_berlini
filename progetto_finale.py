@@ -17,7 +17,7 @@ def simulazione_campionato() -> dict :
 
     for giornata in range(1, 39): # 38 giornate
         print(f"Giornata {giornata}:")
-        for _ in range(10): # 10 partite per giornata
+        for giornata in range(10): # 10 partite per giornata
             squadra_casa, squadra_trasferta = random.sample(campionato, 2)
 
             # Simula un risultato casuale: vittoria, pareggio o sconfitta
@@ -28,7 +28,7 @@ def simulazione_campionato() -> dict :
                 punti[squadra_casa] += 3
                 print(f"{squadra_casa} ha vinto la partita contro {squadra_trasferta}")
 
-                # Pareggio tra le due squadre   
+            # Pareggio tra le due squadre   
             elif risultato == "pareggio":
                 punti[squadra_casa] += 1
                 punti[squadra_trasferta] += 1
@@ -39,7 +39,7 @@ def simulazione_campionato() -> dict :
                 punti[squadra_trasferta] += 3
                 print(f"{squadra_trasferta} ha vinto la partita contro {squadra_casa}")
 
-        print() # linea di spazio che separa le giornate
+        print() 
 
     return punti
 
@@ -47,8 +47,8 @@ def simulazione_campionato() -> dict :
 def visualizzazione_dell_andamento(punti):
 
     # Ordina le squadre in base ai punti
-    # key=lambda x: x[1] = L'ordinamento verrà effettuato in base al secondo elemento di ogni tupla
-    # (che in questo caso corrisponde al punteggio della squadra)
+    # key=lambda x: x[1] = L'ordinamento verrà effettuato in base al secondo elemento della variabile punti
+    # (che in questo caso corrisponde ai punti fatti da ogni squadra)
     classifica_finale = sorted(punti.items(), key=lambda x: x[1], reverse=True)
 
 
